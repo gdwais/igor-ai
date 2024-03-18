@@ -1,5 +1,5 @@
 {
-  "name": "langchain-rag",
+  "name": "igor-ai",
   "module": "index.ts",
   "type": "module",
   "bin": {
