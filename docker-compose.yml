@@ -1,0 +1,27 @@
+version: "3.8"
+
+volumes:
+  db:
+  igor-ai-chroma-data:
+
+services:
+  db:
+    image: "postgres:13.5-alpine3.15"
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata/igor-ai
+      - POSTGRES_DB=igor-ai
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db:/var/lib/postgresql/data/pgdata/igor-ai
+    ports:
+      - "5001:5432"
+      - "5432:5432"
+  chromadb:
+    image: ghcr.io/chroma-core/chroma:latest
+    environment:
+      - IS_PERSISTENT=TRUE
+    volumes:
+      - igor-ai-chroma-data:/chroma/chroma/
+    ports:
+      - 8000:8000
